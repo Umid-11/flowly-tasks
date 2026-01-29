@@ -177,14 +177,19 @@ export default function TaskFormPage() {
                 <div className="space-y-2">
                   <Label>Assignee</Label>
                   <Select
-                    defaultValue={watch('assigneeId')}
-                    onValueChange={(value) => setValue('assigneeId', value)}
+                    value={watch('assigneeId') || 'unassigned'}
+                    onValueChange={(value) =>
+                      setValue('assigneeId', value === 'unassigned' ? '' : value, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Assign to someone" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Unassigned</SelectItem>
+                      <SelectItem value="unassigned">Unassigned</SelectItem>
                       {teamMembers.map(member => (
                         <SelectItem key={member.id} value={member.id}>
                           {member.name}
