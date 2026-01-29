@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { mockUsers, mockTasks } from '@/data/mockData';
+import { AddMemberDialog } from '@/components/team/AddMemberDialog';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +27,7 @@ import { Link } from 'react-router-dom';
 export default function TeamPage() {
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
 
   const filteredUsers = mockUsers.filter(u =>
     u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -50,13 +52,18 @@ export default function TeamPage() {
             </p>
           </div>
           {isAdmin && (
-            <Button>
+            <Button onClick={() => setIsAddMemberOpen(true)}>
               <Plus className="mr-2 h-4 w-4" />
               Add Member
             </Button>
           )}
         </div>
 
+        {/* Add Member Dialog */}
+        <AddMemberDialog
+          open={isAddMemberOpen}
+          onOpenChange={setIsAddMemberOpen}
+        />
         {/* Search */}
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
