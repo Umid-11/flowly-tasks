@@ -24,10 +24,10 @@ export default function DashboardPage() {
   
   if (!user) return null;
 
-  const stats = getDashboardStats(user.id, user.role);
+  const stats = getDashboardStats(user.id, user.role, user.isSuperAdmin);
   
   // Filter tasks based on role
-  const userTasks = user.role === 'admin' 
+  const userTasks = user.role === 'admin' || user.isSuperAdmin
     ? mockTasks 
     : user.role === 'manager'
     ? mockTasks.filter(t => ['3', '4', '5'].includes(t.assigneeId || ''))
@@ -80,7 +80,7 @@ export default function DashboardPage() {
               Here's what's happening with your tasks today.
             </p>
           </div>
-          {(user.role === 'admin' || user.role === 'manager') && (
+          {(user.role === 'admin' || user.role === 'manager' || user.isSuperAdmin) && (
             <Link to="/tasks/new">
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
@@ -224,7 +224,7 @@ export default function DashboardPage() {
                       View Tasks
                     </Button>
                   </Link>
-                  {(user.role === 'admin' || user.role === 'manager') && (
+                  {(user?.role === 'admin' || user?.role === 'manager' || user?.isSuperAdmin) && (
                     <>
                       <Link to="/team">
                         <Button variant="outline" className="w-full justify-start">

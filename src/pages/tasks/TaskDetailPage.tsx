@@ -63,8 +63,8 @@ export default function TaskDetailPage() {
     );
   }
 
-  const canEdit = user?.role === 'admin' || user?.role === 'manager';
-  const canDelete = user?.role === 'admin';
+  const canEdit = user?.role === 'admin' || user?.role === 'manager' || user?.isSuperAdmin;
+  const canDelete = user?.role === 'admin' || user?.isSuperAdmin;
 
   const handleStatusChange = (newStatus: TaskStatus) => {
     setStatus(newStatus);

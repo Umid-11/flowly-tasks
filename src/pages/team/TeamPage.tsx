@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockUsers, mockTasks } from '@/data/mockData';
+import { mockTasks } from '@/data/mockData';
 import { AddMemberDialog } from '@/components/team/AddMemberDialog';
+import { EditRoleDialog } from '@/components/team/EditRoleDialog';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,13 +24,28 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Link } from 'react-router-dom';
+import { User } from '@/types';
 
 export default function TeamPage() {
-  const { user } = useAuth();
+  const { user, updateUserRole, getAllUsers } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
+  const [selectedUserForRole, setSelectedUserForRole] = useState<User | null>(null);
+  const [isEditRoleOpen, setIsEditRoleOpen] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
 
-  const filteredUsers = mockUsers.filter(u =>
+  // Load users on component mount and set up a polling mechanism
+  useEffect(() => {
+    setUsers(getAllUsers());
+    const interval = setInterval(() => {
+      setUsers(getAllUsers());
+    }, 1000); // Poll every second to detect changes
+    return () => clearInterval(interval);
+  }, [getAllUsers]);
+
+  // Show superadmins only to other superadmins
+  const visibleUsers = user?.isSuperAdmin ? users : users.filter(u => !u.isSuperAdmin);
+  const filteredUsers = visibleUsers.filter(u =>
     u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     u.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -38,7 +54,7 @@ export default function TeamPage() {
     return mockTasks.filter(t => t.assigneeId === userId && t.status !== 'done').length;
   };
 
-  const isAdmin = user?.role === 'admin';
+  const isAdmin = user?.role === 'admin' || user?.isSuperAdmin;
 
   return (
     <MainLayout>
@@ -48,10 +64,10 @@ export default function TeamPage() {
           <div>
             <h1 className="text-2xl font-bold md:text-3xl">Team</h1>
             <p className="text-muted-foreground">
-              {isAdmin ? 'Manage team members and roles' : 'View your team members'}
+              {user?.isSuperAdmin ? 'Manage all team members and roles' : isAdmin ? 'Manage team members and roles' : 'View your team members'}
             </p>
           </div>
-          {isAdmin && (
+          {(isAdmin || user?.isSuperAdmin) && (
             <Button onClick={() => setIsAddMemberOpen(true)}>
               <Plus className="mr-2 h-4 w-4" />
               Add Member
@@ -63,6 +79,20 @@ export default function TeamPage() {
         <AddMemberDialog
           open={isAddMemberOpen}
           onOpenChange={setIsAddMemberOpen}
+        />
+
+        {/* Edit Role Dialog */}
+        <EditRoleDialog
+          open={isEditRoleOpen}
+          onOpenChange={setIsEditRoleOpen}
+          user={selectedUserForRole}
+          onRoleChange={async (userId, newRole) => {
+            const success = await updateUserRole(userId, newRole);
+            if (success) {
+              setUsers(getAllUsers());
+            }
+            return success;
+          }}
         />
         {/* Search */}
         <div className="relative max-w-md">
@@ -91,7 +121,7 @@ export default function TeamPage() {
                       <p className="text-sm text-muted-foreground">{member.department}</p>
                     </div>
                   </div>
-                  {isAdmin && (
+                  {(isAdmin || user?.isSuperAdmin) && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon-sm">
@@ -99,9 +129,21 @@ export default function TeamPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Edit Role</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => {
+                            setSelectedUserForRole(member);
+                            setIsEditRoleOpen(true);
+                          }}
+                          disabled={member.isSuperAdmin && !user?.isSuperAdmin}
+                        >
+                          Edit Role
+                        </DropdownMenuItem>
                         <DropdownMenuItem>View Profile</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
+                        <DropdownMenuItem 
+                          className="text-destructive"
+                          disabled={member.isSuperAdmin}
+                          title={member.isSuperAdmin ? 'Cannot delete super admin' : ''}
+                        >
                           Remove
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -116,7 +158,7 @@ export default function TeamPage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <RoleBadge role={member.role} />
+                    <RoleBadge role={member.role} isSuperAdmin={member.isSuperAdmin} />
                     <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <CheckSquare className="h-4 w-4" />
                       <span>{getTaskCount(member.id)} active tasks</span>
@@ -145,8 +187,8 @@ export default function TeamPage() {
 
         {filteredUsers.length === 0 && (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <p className="text-lg font-medium">No team members found</p>
-            <p className="text-muted-foreground">Try adjusting your search</p>
+            <p className="text-lg font-medium">{user?.isSuperAdmin ? 'No team members to view' : 'No team members found'}</p>
+            <p className="text-muted-foreground">{user?.isSuperAdmin ? 'Super admin is not part of any team' : 'Try adjusting your search'}</p>
           </div>
         )}
       </div>

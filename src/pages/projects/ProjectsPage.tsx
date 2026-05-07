@@ -88,7 +88,7 @@ export default function ProjectsPage() {
     }
   };
 
-  const isManager = user?.role === 'admin' || user?.role === 'manager';
+  const isManager = user?.role === 'admin' || user?.role === 'manager' || user?.isSuperAdmin;
 
   return (
     <MainLayout>

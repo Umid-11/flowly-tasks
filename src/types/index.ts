@@ -7,11 +7,25 @@ export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
 export interface User {
   id: string;
   name: string;
+  username: string;
   email: string;
   role: UserRole;
   avatar?: string;
   department?: string;
+  isSuperAdmin?: boolean;
   createdAt: Date;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  description: string;
+  members: User[];
+  createdBy: string;
+  icon?: string;
+  color?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Task {

@@ -12,6 +12,7 @@ import {
   LogOut,
   User,
   FolderKanban,
+  UserCog,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
@@ -25,6 +26,7 @@ interface NavItem {
   href: string;
   roles?: ('admin' | 'manager' | 'employee')[];
   badge?: number;
+  excludeSuperAdmin?: boolean;
 }
 
 const navItems: NavItem[] = [
@@ -33,7 +35,9 @@ const navItems: NavItem[] = [
   { icon: FolderKanban, label: 'Projects', href: '/projects', roles: ['admin', 'manager'] },
   { icon: MessageSquare, label: 'Chat', href: '/chat', badge: 3 },
   { icon: Bell, label: 'Notifications', href: '/notifications', badge: 4 },
-  { icon: Users, label: 'Team', href: '/team', roles: ['admin', 'manager'] },
+  { icon: Users, label: 'Team', href: '/team', roles: ['admin', 'manager'], excludeSuperAdmin: true },
+  { icon: Users, label: 'Teams', href: '/teams', roles: ['admin', 'manager'] },
+  { icon: UserCog, label: 'Employees', href: '/admin/employees', roles: ['admin'] },
   { icon: Settings, label: 'Settings', href: '/settings', roles: ['admin'] },
 ];
 
@@ -43,7 +47,10 @@ export function AppSidebar() {
   const { user, logout } = useAuth();
 
   const filteredNavItems = navItems.filter(
-    item => !item.roles || (user && item.roles.includes(user.role))
+    item => {
+      if (item.excludeSuperAdmin && user?.isSuperAdmin) return false;
+      return !item.roles || (user && (item.roles.includes(user.role) || user.isSuperAdmin));
+    }
   );
 
   return (
@@ -122,7 +129,7 @@ export function AppSidebar() {
             {!collapsed && (
               <div className="flex-1 overflow-hidden">
                 <p className="truncate text-sm font-medium">{user.name}</p>
-                <RoleBadge role={user.role} />
+                <RoleBadge role={user.role} isSuperAdmin={user.isSuperAdmin} />
               </div>
             )}
           </div>

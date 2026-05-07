@@ -60,7 +60,7 @@ export default function SettingsPage() {
     }
   };
 
-  if (user?.role !== 'admin') {
+  if (user?.role !== 'admin' && !user?.isSuperAdmin) {
     return (
       <MainLayout>
         <div className="flex flex-col items-center justify-center py-12">

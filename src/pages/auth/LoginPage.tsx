@@ -12,7 +12,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
 const loginSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
+  username: z.string().min(3, 'Username must be at least 3 characters'),
   password: z.string().min(1, 'Password is required'),
 });
 
@@ -39,7 +39,7 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      const success = await login(data.email, data.password);
+      const success = await login(data.username, data.password);
       if (success) {
         toast({
           title: 'Welcome back!',
@@ -49,7 +49,7 @@ export default function LoginPage() {
       } else {
         toast({
           title: 'Login failed',
-          description: 'Invalid email or password. Try: admin@example.com / password',
+          description: 'Invalid username or password. Try: admin / password',
           variant: 'destructive',
         });
       }
@@ -86,16 +86,16 @@ export default function LoginPage() {
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="username">Username</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="name@example.com"
-                  {...register('email')}
-                  className={errors.email ? 'border-destructive' : ''}
+                  id="username"
+                  type="text"
+                  placeholder="Enter your username"
+                  {...register('username')}
+                  className={errors.username ? 'border-destructive' : ''}
                 />
-                {errors.email && (
-                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                {errors.username && (
+                  <p className="text-sm text-destructive">{errors.username.message}</p>
                 )}
               </div>
 
@@ -146,9 +146,10 @@ export default function LoginPage() {
             <div className="mt-4 rounded-lg bg-muted p-3">
               <p className="mb-2 text-xs font-medium text-muted-foreground">Demo Accounts:</p>
               <div className="space-y-1 text-xs">
-                <p><span className="font-medium">Admin:</span> admin@example.com</p>
-                <p><span className="font-medium">Manager:</span> manager@example.com</p>
-                <p><span className="font-medium">Employee:</span> employee@example.com</p>
+                <p><span className="font-medium">Super Admin:</span> superadmin</p>
+                <p><span className="font-medium">Admin:</span> admin</p>
+                <p><span className="font-medium">Manager:</span> manager</p>
+                <p><span className="font-medium">Employee:</span> employee</p>
                 <p className="text-muted-foreground">Password: password</p>
               </div>
             </div>

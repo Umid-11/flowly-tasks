@@ -88,7 +88,7 @@ export default function ProfilePage() {
                 <h3 className="text-lg font-semibold">{user.name}</h3>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
                 <div className="mt-1">
-                  <RoleBadge role={user.role} />
+                  <RoleBadge role={user.role} isSuperAdmin={user.isSuperAdmin} />
                 </div>
               </div>
             </div>

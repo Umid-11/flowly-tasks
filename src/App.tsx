@@ -29,6 +29,14 @@ import NotificationsPage from "@/pages/notifications/NotificationsPage";
 // Team
 import TeamPage from "@/pages/team/TeamPage";
 
+// Teams
+import TeamsPage from "@/pages/teams/TeamsPage";
+import CreateTeamPage from "@/pages/teams/CreateTeamPage";
+import TeamDetailPage from "@/pages/teams/TeamDetailPage";
+
+// Admin
+import EmployeesPage from "@/pages/admin/EmployeesPage";
+
 // Projects
 import ProjectsPage from "@/pages/projects/ProjectsPage";
 
@@ -125,6 +133,38 @@ const App = () => (
                 element={
                   <ProtectedRoute allowedRoles={['admin', 'manager']}>
                     <TeamPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/teams"
+                element={
+                  <ProtectedRoute>
+                    <TeamsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/teams/create"
+                element={
+                  <ProtectedRoute allowedRoles={['admin', 'manager']}>
+                    <CreateTeamPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/teams/:id"
+                element={
+                  <ProtectedRoute>
+                    <TeamDetailPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/employees"
+                element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <EmployeesPage />
                   </ProtectedRoute>
                 }
               />

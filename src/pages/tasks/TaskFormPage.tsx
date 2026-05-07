@@ -86,7 +86,7 @@ export default function TaskFormPage() {
     }
   };
 
-  const teamMembers = mockUsers.filter(u => u.role !== 'admin');
+  const teamMembers = mockUsers;
 
   return (
     <MainLayout>

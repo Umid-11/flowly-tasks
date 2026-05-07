@@ -43,14 +43,19 @@ export function PriorityBadge({ priority }: PriorityBadgeProps) {
 
 interface RoleBadgeProps {
   role: UserRole;
+  isSuperAdmin?: boolean;
 }
 
-export function RoleBadge({ role }: RoleBadgeProps) {
+export function RoleBadge({ role, isSuperAdmin }: RoleBadgeProps) {
   const config = {
     'admin': { label: 'Admin', variant: 'role-admin' as const },
     'manager': { label: 'Manager', variant: 'role-manager' as const },
     'employee': { label: 'Employee', variant: 'role-employee' as const },
   };
+
+  if (isSuperAdmin) {
+    return <Badge variant="role-admin" className="bg-purple-600 hover:bg-purple-700">Super Admin</Badge>;
+  }
 
   const { label, variant } = config[role];
 

@@ -21,7 +21,7 @@ export default function TasksPage() {
   // Filter tasks based on role
   const baseTasks = useMemo(() => {
     if (!user) return [];
-    if (user.role === 'admin') return mockTasks;
+    if (user.role === 'admin' || user.isSuperAdmin) return mockTasks;
     if (user.role === 'manager') {
       return mockTasks.filter(t => ['3', '4', '5'].includes(t.assigneeId || ''));
     }
@@ -55,7 +55,7 @@ export default function TasksPage() {
     done: filteredTasks.filter(t => t.status === 'done'),
   };
 
-  const canCreateTask = user?.role === 'admin' || user?.role === 'manager';
+  const canCreateTask = user?.role === 'admin' || user?.role === 'manager' || user?.isSuperAdmin;
 
   return (
     <MainLayout>
@@ -65,7 +65,7 @@ export default function TasksPage() {
           <div>
             <h1 className="text-2xl font-bold md:text-3xl">Tasks</h1>
             <p className="text-muted-foreground">
-              {user?.role === 'admin' 
+              {user?.isSuperAdmin || user?.role === 'admin'
                 ? 'Manage all tasks across the organization'
                 : user?.role === 'manager'
                 ? 'Manage your team\'s tasks'
