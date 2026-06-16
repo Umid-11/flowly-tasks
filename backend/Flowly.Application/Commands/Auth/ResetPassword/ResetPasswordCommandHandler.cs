@@ -29,13 +29,13 @@ namespace Flowly.Application.Commands.Auth.ResetPassword;
             if (resetToken == null || resetToken.IsUsed || resetToken.ExpiresAt < DateTime.UtcNow)
                 return false;
 
-            var user = await _userRepository.GetByIdAsync(resetToken.UserId);
+            var user = await _userRepository.GetUserByIdAsync(resetToken.UserId);
             if (user == null) return false;
 
             // Update user's password hash
             var hashed = _passwordHasher.Hash(request.NewPassword);
             user.PasswordHash = hashed;
-            await _userRepository.UpdateAsync(user);
+            await _userRepository.UpdateUserAsync(user);
 
             // Mark token as used
             await _tokenRepository.MarkAsUsedAsync(request.Token);

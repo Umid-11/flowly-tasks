@@ -12,10 +12,12 @@ namespace Flowly.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IMediator mediator)
+    public AuthController(IMediator mediator, ILogger<AuthController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     // Refresh token-i HttpOnly cookie olaraq response-a yazır
@@ -28,6 +30,8 @@ public class AuthController : ControllerBase
             SameSite = SameSiteMode.Lax, // CSRF-dən qorunmaq üçün
             Expires = DateTime.UtcNow.AddDays(7)
         };
+
+        _logger.LogInformation("Refresh token: {refreshToken}", refreshToken);
 
         Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
     }
@@ -47,8 +51,11 @@ public class AuthController : ControllerBase
         var result = await _mediator.Send(command);
 
         if (result)
+        {
+            _logger.LogInformation("İstifadəçi uğurla yaradıldı: {username}", dto.Username);
             return Ok(new { message = "İstifadəçi uğurla yaradıldı" });
-
+        }
+        _logger.LogWarning("Qeydiyyat zamanı xəta baş verdi (Email artıq mövcud ola bilər)");
         return BadRequest(new { message = "Qeydiyyat zamanı xəta baş verdi (Email artıq mövcud ola bilər)" });
     }
 
@@ -63,15 +70,21 @@ public class AuthController : ControllerBase
 
         var result = await _mediator.Send(command);
 
-        // Refresh token-i HttpOnly cookie-yə yazırıq
-        SetRefreshTokenCookie(result.RefreshToken);
-
-        // Refresh token-i artıq body-dən çıxarırıq
-        return Ok(new
+        if (result != null)
         {
-            token = result.Token,
-            user = result.User
-        });
+            // Set refresh token cookie
+            SetRefreshTokenCookie(result.RefreshToken);
+
+            _logger.LogInformation("İstifadəçi uğurla daxil oldu: {username}", dto.Username);
+            return Ok(new
+            {
+                token = result.Token,
+                user = result.User
+            });
+        }
+
+        _logger.LogWarning("Login zamanı xəta baş verdi (Email və ya şifrə yanlışdır)");
+        return Unauthorized(new { message = "Login zamanı xəta baş verdi (Email və ya şifrə yanlışdır)" });
     }
 
     [HttpPost("refresh-token")]

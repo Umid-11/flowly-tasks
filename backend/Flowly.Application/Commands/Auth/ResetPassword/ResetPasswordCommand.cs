@@ -1,9 +1,4 @@
 using MediatR;
-using Flowly.Application.Interfaces;
-using Flowly.Domain.Entities;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 namespace Flowly.Application.Commands.Auth.ResetPassword;
 
 // Reset password command

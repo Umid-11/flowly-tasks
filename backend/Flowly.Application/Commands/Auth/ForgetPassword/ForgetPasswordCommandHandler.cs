@@ -3,6 +3,7 @@ using Flowly.Application.Interfaces;
 using Flowly.Domain.Entities;
 using System.Threading;
 using System;
+using AutoMapper;
 
 namespace Flowly.Application.Commands.Auth.ForgetPassword;
     public class ForgetPasswordCommandHandler : IRequestHandler<ForgetPasswordCommand, bool>
@@ -10,11 +11,13 @@ namespace Flowly.Application.Commands.Auth.ForgetPassword;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordResetTokenRepository _tokenRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IMapper _mapper;
 
         public ForgetPasswordCommandHandler(
             IUserRepository userRepository,
             IPasswordResetTokenRepository tokenRepository,
-            IPasswordHasher passwordHasher)
+            IPasswordHasher passwordHasher,
+            IMapper mapper)
         {
             _userRepository = userRepository;
             _tokenRepository = tokenRepository;
@@ -29,7 +32,7 @@ namespace Flowly.Application.Commands.Auth.ForgetPassword;
 
             // Generate a secure token
             var token = Guid.NewGuid().ToString("N");
-            var expiresAt = DateTime.UtcNow.AddHours(1);
+            var expiresAt = DateTime.UtcNow.AddMinutes(15);
 
             var resetToken = new PasswordResetToken
             {
@@ -39,11 +42,10 @@ namespace Flowly.Application.Commands.Auth.ForgetPassword;
                 IsUsed = false,
                 CreatedAt = DateTime.UtcNow
             };
+        
 
             await _tokenRepository.AddAsync(resetToken);
 
-            // TODO: Integrate email service to send the token link to the user
-            // e.g., await _emailService.SendPasswordResetAsync(user.Email, token);
 
             return true;
         }

@@ -10,5 +10,7 @@ public interface IUserRepository
     Task<User?> GetUserByUsernameAsync(string username);
     Task<List<User>> GetAllUsersAsync();
     Task<bool> AddUserAsync(User user);
-    Task<bool> UpdateAsync(User user);
+    Task<bool> UpdateUserAsync(User user);
+    Task<bool> UpdateUserRoleAsync(int userId, int roleId);
+    Task<bool> RemoveUserAsync(int id);
 }

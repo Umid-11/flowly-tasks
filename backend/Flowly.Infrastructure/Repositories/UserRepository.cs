@@ -111,4 +111,13 @@ public class UserRepository : IUserRepository
         var rowsAffected = await db.ExecuteAsync(sql, user);
         return rowsAffected > 0;
     }
+
+    public async Task<bool> RemoveUserAsync(int id)
+    {
+        using var db = CreateConnection();
+        var rowsAffected = await db.ExecuteAsync(
+            "UPDATE Users SET IsActive = false, UpdatedAt = @UpdatedAt WHERE Id = @Id", 
+            new { Id = id , UpdatedAt = DateTime.UtcNow});
+        return rowsAffected > 0;
+    }
 }

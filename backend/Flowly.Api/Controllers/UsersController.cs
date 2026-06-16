@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Flowly.Application.DTOs;
 using Flowly.Application.Commands.Users.UpdateRole;
+using Flowly.Application.Commands.Users.RemoveUser;
 
 namespace Flowly.Api.Controllers;
 
@@ -15,11 +16,13 @@ public class UsersController : ControllerBase
 {
     private readonly IDbConnection _dbConnection;
     private readonly IMediator _mediator;
+    private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IDbConnection dbConnection, IMediator mediator)
+    public UsersController(IDbConnection dbConnection, IMediator mediator, ILogger<UsersController> logger)
     {
         _dbConnection = dbConnection;
         _mediator = mediator;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -33,8 +36,10 @@ public class UsersController : ControllerBase
                 _dbConnection.Open();
             }
 
-            var sql = "SELECT * FROM users";
+            var sql = "SELECT * FROM users WHERE IsActive = true";
             var users = await _dbConnection.QueryAsync<Flowly.Domain.Entities.User>(sql);
+
+            _logger.LogInformation("Users count: {Count}", users.Count());
             
             return Ok(users);
         }
@@ -77,6 +82,27 @@ public class UsersController : ControllerBase
             return Ok(new { message = "İstifadəçinin rolu uğurla yeniləndi." });
 
         return BadRequest(new { message = "Rol yenilənərkən xəta baş verdi (İstifadəçi tapılmaya bilər)." });
+    }
+
+    [Authorize(Roles="SuperAdmin,Admin")]
+    [HttpDelete("remove-user/{userId}")]
+    public async Task<IActionResult> RemoveUser(int userId)
+    {
+        _logger.LogInformation("Received RemoveUser request for user:");
+        var command = new RemoveUserCommand
+        {
+            UserId = userId
+        };
+
+        var result = await _mediator.Send(command);
+
+        if (result){
+            _logger.LogInformation("İstifadəçi uğurla silindi.");
+            return Ok(new { message = "İstifadəçi uğurla silindi." });
+        }
+
+        _logger.LogWarning("İstifadəçi silinərkən xəta baş verdi (İstifadəçi tapılmaya bilər).");
+        return BadRequest(new { message = "İstifadəçi silinərkən xəta baş verdi (İstifadəçi tapılmaya bilər)." });
     }
 }
 

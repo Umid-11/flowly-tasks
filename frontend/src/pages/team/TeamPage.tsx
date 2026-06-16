@@ -33,35 +33,53 @@ export default function TeamPage() {
   const [selectedUserForRole, setSelectedUserForRole] = useState<User | null>(null);
   const [isEditRoleOpen, setIsEditRoleOpen] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
-
   // Load users from Backend API (PostgreSQL)
+
   useEffect(() => {
+    let isMounted = true;
+
     const fetchUsersFromDB = async () => {
       try {
         const response = await fetch('http://localhost:5064/api/users');
-        if (response.ok) {
-          const dbUsers = await response.json();
-          // Backend-dən gələn datanı UI-ın gözlədiyi formata map edirik (əgər fərqlidirsə)
-          const mappedUsers = dbUsers.map((u: any) => ({
-            id: u.id,
-            name: `${u.firstName} ${u.lastName}`,
-            email: u.email,
-            role: u.roleId === 2 ? 'admin' : u.roleId === 3 ? 'manager' : 'employee',
-            isSuperAdmin: u.roleId === 1,
-            department: 'Development',
-            status: u.isActive ? 'active' : 'inactive',
-            avatar: u.avatarUrl || `https://ui-avatars.com/api/?name=${u.firstName}+${u.lastName}`
-          }));
+
+        if (!response.ok) return;
+
+        const dbUsers = await response.json();
+
+        const mappedUsers = dbUsers.map((u: any) => ({
+          id: u.id,
+          name: `${u.firstName} ${u.lastName}`,
+          email: u.email,
+          role:
+            u.roleId === 2
+              ? 'admin'
+              : u.roleId === 3
+                ? 'manager'
+                : 'employee',
+          isSuperAdmin: u.roleId === 1,
+          department: 'Development',
+          status: u.isActive ? 'active' : 'inactive',
+          avatar:
+            u.avatarUrl ||
+            `https://ui-avatars.com/api/?name=${u.firstName}+${u.lastName}`,
+        }));
+
+        if (isMounted) {
           setUsers(mappedUsers);
         }
       } catch (error) {
-        console.error("Failed to fetch users from DB:", error);
+        console.error('Failed to fetch users from DB:', error);
       }
     };
 
     fetchUsersFromDB();
-    const interval = setInterval(fetchUsersFromDB, 5000); // Poll every 5 seconds
-    return () => clearInterval(interval);
+
+    const interval = setInterval(fetchUsersFromDB, 5000);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   // Show superadmins only to other superadmins
@@ -160,7 +178,7 @@ export default function TeamPage() {
                           Edit Role
                         </DropdownMenuItem>
                         <DropdownMenuItem>View Profile</DropdownMenuItem>
-                        <DropdownMenuItem 
+                        <DropdownMenuItem
                           className="text-destructive"
                           disabled={member.isSuperAdmin}
                           title={member.isSuperAdmin ? 'Cannot delete super admin' : ''}

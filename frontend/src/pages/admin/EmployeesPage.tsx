@@ -43,6 +43,47 @@ export default function EmployeesPage() {
   const [users, setUsers] = useState<User[]>([]);
   const { toast } = useToast();
 
+  const removeUser = async (userId: number) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `http://localhost:5064/api/users/remove-user/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Success",
+          description: data.message
+        });
+
+        setUsers(prev => prev.filter(u => Number(u.id) !== userId));
+      } else {
+        toast({
+          title: "Error",
+          description: data.message,
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error(error);
+
+      toast({
+        title: "Error",
+        description: "Failed to remove user",
+        variant: "destructive"
+      });
+    }
+  };
+
   // Load users from Backend API (PostgreSQL)
   useEffect(() => {
     const fetchEmployeesFromDB = async () => {
@@ -88,17 +129,17 @@ export default function EmployeesPage() {
 
   const filteredUsers = user?.isSuperAdmin
     ? users.filter(u =>
+      u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      u.username.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    : users.filter(u =>
+      !u.isSuperAdmin && (
         u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         u.username.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : users.filter(u =>
-        !u.isSuperAdmin && (
-          u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          u.username.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      );
+    );
 
   // Show superadmin count even to non-superadmins
   const getSuperAdminCount = () => users.filter(u => u.isSuperAdmin).length;
@@ -281,10 +322,21 @@ export default function EmployeesPage() {
                               <Key className="mr-2 h-4 w-4" />
                               Reset Password
                             </DropdownMenuItem>
-                            <DropdownMenuItem 
+                            <DropdownMenuItem
                               className="text-destructive"
                               disabled={employee.isSuperAdmin}
                               title={employee.isSuperAdmin ? 'Cannot delete super admin' : ''}
+                              onClick={() => {
+                                if (employee.isSuperAdmin) return;
+
+                                const confirmed = window.confirm(
+                                  `Are you sure you want to remove ${employee.name}?`
+                                );
+
+                                if (confirmed) {
+                                  removeUser(Number(employee.id));
+                                }
+                              }}
                             >
                               Remove
                             </DropdownMenuItem>
