@@ -1,0 +1,16 @@
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\bin\Debug\net10.0\Flowly.Application.deps.json
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\bin\Debug\net10.0\Flowly.Application.dll
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\bin\Debug\net10.0\Flowly.Application.pdb
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\bin\Debug\net10.0\Flowly.Domain.dll
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\bin\Debug\net10.0\Flowly.Domain.pdb
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.csproj.AssemblyReference.cache
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.AssemblyInfoInputs.cache
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.AssemblyInfo.cs
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.csproj.CoreCompileInputs.cache
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.sourcelink.json
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.A.ABAF36D5.Up2Date
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.dll
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\refint\Flowly.Application.dll
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\Flowly.Application.pdb
+C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Application\obj\Debug\net10.0\ref\Flowly.Application.dll

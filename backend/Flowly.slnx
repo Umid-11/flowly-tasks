@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Flowly.Api/Flowly.Api.csproj" />
+  <Project Path="Flowly.Application/Flowly.Application.csproj" />
+  <Project Path="Flowly.Domain/Flowly.Domain.csproj" />
+  <Project Path="Flowly.Infrastructure/Flowly.Infrastructure.csproj" />
+</Solution>
