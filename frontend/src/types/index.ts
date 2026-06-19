@@ -13,6 +13,8 @@ export interface User {
   avatar?: string;
   department?: string;
   isSuperAdmin?: boolean;
+  status?: 'active' | 'inactive';
+  isActive?: boolean;
   createdAt: Date;
 }
 

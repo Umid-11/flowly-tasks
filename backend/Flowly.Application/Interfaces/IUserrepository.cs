@@ -12,5 +12,5 @@ public interface IUserRepository
     Task<bool> AddUserAsync(User user);
     Task<bool> UpdateUserAsync(User user);
     Task<bool> UpdateUserRoleAsync(int userId, int roleId);
-    Task<bool> RemoveUserAsync(int id);
+    Task<bool> UpdateUserActiveStatusAsync(int userId, bool isActive);
 }

@@ -7,21 +7,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { RoleBadge } from '@/components/StatusBadge';
 import { EditRoleDialog } from '@/components/team/EditRoleDialog';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import {
   Search,
   MoreVertical,
   Mail,
   Users,
-  Loader2,
   Key,
 } from 'lucide-react';
 import {
@@ -33,7 +25,7 @@ import {
 import { User } from '@/types';
 
 export default function EmployeesPage() {
-  const { user, getAllUsers, updateUserRole } = useAuth();
+  const { user, updateUserRole } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedUserForRole, setSelectedUserForRole] = useState<User | null>(null);
   const [selectedUserForPassword, setSelectedUserForPassword] = useState<User | null>(null);
@@ -43,17 +35,53 @@ export default function EmployeesPage() {
   const [users, setUsers] = useState<User[]>([]);
   const { toast } = useToast();
 
-  const removeUser = async (userId: number) => {
+  const resetPassword = async (targetUser: User) => {
+    setIsResettingPassword(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(
+        `http://localhost:5064/api/users/reset-password`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ userId: Number(targetUser.id) }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        toast({ title: 'Success', description: data.message || 'Password reset successfully' });
+        setIsResetPasswordOpen(false);
+      } else {
+        toast({ title: 'Error', description: data.message || 'Failed to reset password', variant: 'destructive' });
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to reset password', variant: 'destructive' });
+    } finally {
+      setIsResettingPassword(false);
+    }
+  };
+
+
+
+  const toggleUserActiveStatus = async (userId: string, isActive: boolean) => {
     try {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5064/api/users/remove-user/${userId}`,
+        `http://localhost:5064/api/users/update-active-status`,
         {
-          method: "DELETE",
+          method: "PUT",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
-          }
+          },
+          body: JSON.stringify({
+            userId: Number(userId),
+            isActive: isActive
+          })
         }
       );
 
@@ -62,14 +90,20 @@ export default function EmployeesPage() {
       if (response.ok) {
         toast({
           title: "Success",
-          description: data.message
+          description: data.message || "User status updated successfully"
         });
 
-        setUsers(prev => prev.filter(u => Number(u.id) !== userId));
+        setUsers(prev =>
+          prev.map(u =>
+            u.id === userId
+              ? { ...u, status: isActive ? 'active' : 'inactive' }
+              : u
+          )
+        );
       } else {
         toast({
           title: "Error",
-          description: data.message,
+          description: data.message || "Failed to update user status",
           variant: "destructive"
         });
       }
@@ -78,7 +112,7 @@ export default function EmployeesPage() {
 
       toast({
         title: "Error",
-        description: "Failed to remove user",
+        description: "Failed to update user status",
         variant: "destructive"
       });
     }
@@ -94,7 +128,7 @@ export default function EmployeesPage() {
           const mappedUsers = dbUsers.map((u: any) => ({
             id: u.id,
             name: `${u.firstName} ${u.lastName}`,
-            username: u.email, // Email-i username kimi istifadə edirik
+            username: u.userName, // Database-dən birbaşa userName götürürük
             email: u.email,
             role: u.roleId === 2 ? 'admin' : u.roleId === 3 ? 'manager' : 'employee',
             isSuperAdmin: u.roleId === 1,
@@ -132,20 +166,20 @@ export default function EmployeesPage() {
       u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.username.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    ).sort((a, b) => Number(a.id) - Number(b.id))
     : users.filter(u =>
-      !u.isSuperAdmin && (
+      !u.isSuperAdmin && u.status === 'active' && (
         u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         u.username.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    );
+    ).sort((a, b) => Number(a.id) - Number(b.id));
 
   // Show superadmin count even to non-superadmins
   const getSuperAdminCount = () => users.filter(u => u.isSuperAdmin).length;
 
   const getRoleCounts = () => {
-    const visibleUsers = user?.isSuperAdmin ? users : users.filter(u => !u.isSuperAdmin);
+    const visibleUsers = user?.isSuperAdmin ? users : users.filter(u => !u.isSuperAdmin && u.status === 'active');
     const superAdminUsers = users.filter(u => u.isSuperAdmin);
     return {
       totalUsers: visibleUsers.length,
@@ -221,7 +255,7 @@ export default function EmployeesPage() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Users</p>
+                  <p className="text-sm text-muted-foreground">Employees</p>
                   <p className="text-2xl font-bold">{counts.employees}</p>
                 </div>
                 <Users className="h-8 w-8 text-green-600" />
@@ -263,6 +297,11 @@ export default function EmployeesPage() {
                     <th className="px-6 py-3 text-left text-sm font-semibold text-muted-foreground">
                       Role
                     </th>
+                    {user?.isSuperAdmin && (
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-muted-foreground">
+                        Status
+                      </th>
+                    )}
                     <th className="px-6 py-3 text-left text-sm font-semibold text-muted-foreground">
                       Actions
                     </th>
@@ -296,6 +335,20 @@ export default function EmployeesPage() {
                       <td className="px-6 py-4">
                         <RoleBadge role={employee.role} isSuperAdmin={employee.isSuperAdmin} />
                       </td>
+                      {user?.isSuperAdmin && (
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${employee.status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'}`}>
+                              {employee.status === 'active' ? 'Active' : 'Inactive'}
+                            </span>
+                            <Switch
+                              checked={employee.status === 'active'}
+                              disabled={Number(employee.id) === Number(user.id)}
+                              onCheckedChange={(checked) => toggleUserActiveStatus(employee.id, checked)}
+                            />
+                          </div>
+                        </td>
+                      )}
                       <td className="px-6 py-4">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -309,6 +362,7 @@ export default function EmployeesPage() {
                                 setSelectedUserForRole(employee);
                                 setIsEditRoleOpen(true);
                               }}
+                              disabled={employee.isSuperAdmin}
                             >
                               Edit Role
                             </DropdownMenuItem>
@@ -321,24 +375,6 @@ export default function EmployeesPage() {
                             >
                               <Key className="mr-2 h-4 w-4" />
                               Reset Password
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              className="text-destructive"
-                              disabled={employee.isSuperAdmin}
-                              title={employee.isSuperAdmin ? 'Cannot delete super admin' : ''}
-                              onClick={() => {
-                                if (employee.isSuperAdmin) return;
-
-                                const confirmed = window.confirm(
-                                  `Are you sure you want to remove ${employee.name}?`
-                                );
-
-                                if (confirmed) {
-                                  removeUser(Number(employee.id));
-                                }
-                              }}
-                            >
-                              Remove
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -371,6 +407,29 @@ export default function EmployeesPage() {
             return success;
           }}
         />
+
+        {/* Reset Password Confirm Dialog */}
+        {isResetPasswordOpen && selectedUserForPassword && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="bg-background rounded-lg shadow-lg p-6 w-full max-w-sm space-y-4">
+              <h2 className="text-lg font-semibold">Reset Password</h2>
+              <p className="text-sm text-muted-foreground">
+                <strong>{selectedUserForPassword.name}</strong> istifadəçisinin şifrəsini sıfırlamaq istədiyinizə əminsiniz?
+              </p>
+              <div className="flex gap-2 justify-end">
+                <Button variant="outline" onClick={() => setIsResetPasswordOpen(false)} disabled={isResettingPassword}>
+                  Ləğv et
+                </Button>
+                <Button
+                  onClick={() => resetPassword(selectedUserForPassword)}
+                  disabled={isResettingPassword}
+                >
+                  {isResettingPassword ? 'Sıfırlanır...' : 'Təsdiq et'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </MainLayout>
   );

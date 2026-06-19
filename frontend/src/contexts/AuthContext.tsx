@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { User, UserRole, AuthState } from '@/types';
 
 interface AuthContextType extends AuthState {
-  login: (username: string, password: string) => Promise<boolean>;
+  login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   register: (username: string, firstName: string, lastName: string, email: string, password: string, role: UserRole) => Promise<boolean>;
   updateUser: (user: Partial<User>) => void;
@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { user: null, isAuthenticated: false, isLoading: false };
   });
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const login = async (username: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const response = await fetch('http://localhost:5064/api/Auth/login', {
         method: 'POST',
@@ -73,20 +73,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const user = buildUserFromToken(data.token);
         if (user) {
           setAuthState({ user, isAuthenticated: true, isLoading: false });
-          return true;
+          return { success: true };
         }
+      } else {
+        const data = await response.json().catch(() => ({}));
+        return { success: false, error: data.message || 'Invalid username or password' };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
+      return { success: false, error: error.message || 'Something went wrong. Please try again.' };
     }
 
     setAuthState(prev => ({ ...prev, isAuthenticated: false, isLoading: false }));
-    return false;
+    return { success: false, error: 'Invalid username or password' };
   };
 
   const logout = async (): Promise<void> => {
     try {
-      // Backend-ə logout sorğusu göndəririk ki, HttpOnly cookie silinsin
+      // Backend-ə logout sorğusu göndəririk ki, HttpOnly cookie silinsi
       await fetch('http://localhost:5064/api/Auth/logout', {
         method: 'POST',
         credentials: 'include',

@@ -30,14 +30,32 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponseDto
         var user = await _userRepository.GetUserByUsernameAsync(request.Username);
         if (user == null)
         {
-            throw new Exception("Invalid email or password");
+            throw new Exception("Username və ya şifrə yanlışdır");
         }
 
+        if (!user.IsActive)
+        {
+            throw new Exception("Hesabınız deaktiv edilib. Zəhmət olmasa administratorla əlaqə saxlayın.");
+        }
+        if(user.LockoutEnd.HasValue && user.LockoutEnd > DateTime.UtcNow)
+        {
+            throw new Exception("Hesabınız bloklanıb. Zəhmət olmasa administratorla əlaqə saxlayın.");
+        }
         // Şifrəni yoxlayırıq
         if (!_passwordHasher.Verify(request.Password, user.PasswordHash))
         {
-            throw new Exception("Invalid email or password");
+            user.FailedLoginAttempts++;
+
+            if (user.FailedLoginAttempts >= 5)
+            {
+                user.LockoutEnd = DateTime.UtcNow.AddMinutes(1);
+                user.FailedLoginAttempts = 0;
+            }
+            await _userRepository.UpdateAsync(user);
+            throw new Exception("Username və ya şifrə yanlışdır");
         }
+
+       
 
         // Access token və refresh token yaradırıq
         var accessToken = _tokenService.GenerateToken(user);

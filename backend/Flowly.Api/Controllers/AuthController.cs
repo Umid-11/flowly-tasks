@@ -62,29 +62,33 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        var command = new LoginCommand
-        {
-            Username = dto.Username,
-            Password = dto.Password
-        };
+             try
+                {
+                    var command = new LoginCommand
+                    {
+                        Username = dto.Username,
+                        Password = dto.Password
+                    };
 
-        var result = await _mediator.Send(command);
+                    var result = await _mediator.Send(command);
 
-        if (result != null)
-        {
-            // Set refresh token cookie
-            SetRefreshTokenCookie(result.RefreshToken);
+                    SetRefreshTokenCookie(result.RefreshToken);
 
-            _logger.LogInformation("İstifadəçi uğurla daxil oldu: {username}", dto.Username);
-            return Ok(new
-            {
-                token = result.Token,
-                user = result.User
-            });
-        }
+                    return Ok(new
+                    {
+                        token = result.Token,
+                        user = result.User
+                    });
+                }
+             catch (Exception ex)
+                {
 
-        _logger.LogWarning("Login zamanı xəta baş verdi (Email və ya şifrə yanlışdır)");
-        return Unauthorized(new { message = "Login zamanı xəta baş verdi (Email və ya şifrə yanlışdır)" });
+                    _logger.LogError("Login error: {ex.Message}", ex.Message);
+                    return Unauthorized(new
+                    {
+                        message = ex.Message
+                    });
+                }
     }
 
     [HttpPost("refresh-token")]

@@ -82,8 +82,8 @@ export default function TeamPage() {
     };
   }, []);
 
-  // Show superadmins only to other superadmins
-  const visibleUsers = user?.isSuperAdmin ? users : users.filter(u => !u.isSuperAdmin);
+  // Show superadmins only to other superadmins, and only active users
+  const visibleUsers = (user?.isSuperAdmin ? users : users.filter(u => !u.isSuperAdmin)).filter(u => u.status === 'active');
   const filteredUsers = visibleUsers.filter(u =>
     u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     u.email.toLowerCase().includes(searchQuery.toLowerCase())

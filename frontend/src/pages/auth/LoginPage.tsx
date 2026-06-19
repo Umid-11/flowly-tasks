@@ -16,6 +16,8 @@ const loginSchema = z.object({
   password: z.string().min(1, 'Password is required'),
 });
 
+
+
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
@@ -39,8 +41,8 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      const success = await login(data.username, data.password);
-      if (success) {
+      const result = await login(data.username, data.password);
+      if (result.success) {
         toast({
           title: 'Welcome back!',
           description: 'You have successfully logged in.',
@@ -49,7 +51,7 @@ export default function LoginPage() {
       } else {
         toast({
           title: 'Login failed',
-          description: 'Invalid username or password.',
+          description: result.error || 'Invalid username or password.',
           variant: 'destructive',
         });
       }

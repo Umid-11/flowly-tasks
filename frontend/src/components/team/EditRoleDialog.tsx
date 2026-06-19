@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User, UserRole } from '@/types';
 import {
   Dialog,
@@ -37,9 +37,15 @@ export function EditRoleDialog({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleOpenChange = (newOpen: boolean) => {
-    if (user) {
+  useEffect(() => {
+    if (open && user) {
       setSelectedRole(user.role);
+    }
+  }, [open, user]);
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!newOpen) {
+      setSelectedRole('');
     }
     onOpenChange(newOpen);
   };

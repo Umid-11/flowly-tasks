@@ -105,19 +105,22 @@ public class UserRepository : IUserRepository
                         PasswordHash = @PasswordHash,
                         RoleId = @RoleId,
                         IsActive = @IsActive,
-                        UpdatedAt = @UpdatedAt
+                        UpdatedAt = @UpdatedAt,
+                        FailedLoginAttempts = @FailedLoginAttempts,
+                        LockoutEnd = @LockoutEnd
                     WHERE Id = @Id";
         
         var rowsAffected = await db.ExecuteAsync(sql, user);
         return rowsAffected > 0;
     }
 
-    public async Task<bool> RemoveUserAsync(int id)
+    public async Task<bool> UpdateUserActiveStatusAsync(int userId, bool isActive)
     {
         using var db = CreateConnection();
         var rowsAffected = await db.ExecuteAsync(
-            "UPDATE Users SET IsActive = false, UpdatedAt = @UpdatedAt WHERE Id = @Id", 
-            new { Id = id , UpdatedAt = DateTime.UtcNow});
+            "UPDATE Users SET IsActive = @IsActive, UpdatedAt = @UpdatedAt WHERE Id = @Id", 
+            new { Id = userId, IsActive = isActive, UpdatedAt = DateTime.UtcNow });
         return rowsAffected > 0;
     }
+
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flowly.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ea0bed0e29335287b04b26a6cd9c15d679c48d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4951489e8c08deb194226f086a1f85a276a95fb0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flowly.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flowly.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -12,6 +12,8 @@ public class User
     public bool IsActive { get; set; } = true;
     public int RoleId { get; set; }
     public Role Role { get; set; } 
+    public int FailedLoginAttempts { get; set; } = 0;
+    public DateTime? LockoutEnd { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
