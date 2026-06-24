@@ -51,7 +51,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponseDto
                 user.LockoutEnd = DateTime.UtcNow.AddMinutes(1);
                 user.FailedLoginAttempts = 0;
             }
-            await _userRepository.UpdateAsync(user);
+            await _userRepository.UpdateUserAsync(user);
             throw new Exception("Username və ya şifrə yanlışdır");
         }
 

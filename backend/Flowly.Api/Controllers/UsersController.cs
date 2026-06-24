@@ -39,7 +39,7 @@ public class UsersController : ControllerBase
                 _dbConnection.Open();
             }
 
-            var sql = "SELECT * FROM users ";
+            var sql = "SELECT * FROM users WHERE RoleId != 1";
             var users = await _dbConnection.QueryAsync<Flowly.Domain.Entities.User>(sql);
             
             return Ok(users);

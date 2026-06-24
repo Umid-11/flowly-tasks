@@ -72,7 +72,7 @@ public class UserRepository : IUserRepository
     public async Task<List<User>> GetAllUsersAsync()
     {
         using var db = CreateConnection();
-        var result = await db.QueryAsync<User>("SELECT * FROM Users");
+        var result = await db.QueryAsync<User>("SELECT * FROM Users WHERE RoleId != 1");
         return result.ToList();
     }
 

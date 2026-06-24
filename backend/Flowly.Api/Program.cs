@@ -62,6 +62,7 @@ builder.Services.AddScoped<Flowly.Application.Interfaces.IPasswordHasher, Flowly
 builder.Services.AddScoped<Flowly.Application.Interfaces.IRefreshTokenRepository, Flowly.Infrastructure.Repositories.RefreshTokenRepository>();
 builder.Services.AddScoped<Flowly.Application.Interfaces.ITokenService, Flowly.Infrastructure.Services.TokenService>();
 builder.Services.AddScoped<Flowly.Application.Interfaces.IPasswordResetTokenRepository, Flowly.Infrastructure.Repositories.PasswordResetTokenRepository>();
+builder.Services.AddScoped<Flowly.Application.Interfaces.ITeamsRepository, Flowly.Infrastructure.Repositories.TeamsRepository>();
 
 // Logging əlavə edirik (DbSeeder üçün lazımdır)
 builder.Services.AddLogging();

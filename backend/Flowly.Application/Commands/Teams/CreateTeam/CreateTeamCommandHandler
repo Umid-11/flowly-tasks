@@ -1,0 +1,25 @@
+using MediatR;
+using Flowly.Domain.Entities;
+using Flowly.Application.Interfaces;
+
+namespace Flowly.Application.Commands.Teams.CreateTeam;
+
+public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, int>
+{
+    private readonly ITeamsRepository _teamsRepository;
+
+    public CreateTeamCommandHandler(ITeamsRepository teamsRepository)
+    {
+        _teamsRepository = teamsRepository;
+    }
+
+    public async Task<int> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
+    {
+        var team = new Team
+        {
+            Name = request.Name,
+            CreatedAt = DateTime.UtcNow
+        };
+        return await _teamsRepository.CreateTeamAsync(team);
+    }
+}

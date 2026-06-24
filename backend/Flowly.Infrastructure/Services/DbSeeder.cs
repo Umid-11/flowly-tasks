@@ -22,6 +22,9 @@ public static class DbSeeder
         // RefreshTokens cədvəlini yaradırıq (əgər yoxdursa)
         await EnsureRefreshTokensTableAsync(config, logger);
 
+        // Teams və TeamMembers cədvəllərini yaradırıq (əgər yoxdursa)
+        //await EnsureTeamsTablesAsync(config, logger);
+
         // appsettings.json-dan SuperAdmin məlumatlarını oxuyuruq
         var email     = config["SuperAdminSettings:Email"]!;
         var userName  = config["SuperAdminSettings:UserName"]!;

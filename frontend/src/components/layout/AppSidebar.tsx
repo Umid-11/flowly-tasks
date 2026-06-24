@@ -35,8 +35,8 @@ const navItems: NavItem[] = [
   { icon: FolderKanban, label: 'Projects', href: '/projects', roles: ['admin', 'manager'] },
   { icon: MessageSquare, label: 'Chat', href: '/chat', badge: 3 },
   { icon: Bell, label: 'Notifications', href: '/notifications', badge: 4 },
-  { icon: Users, label: 'Team', href: '/team', roles: ['admin', 'manager'], excludeSuperAdmin: true },
-  { icon: Users, label: 'Teams', href: '/teams', roles: ['manager'] },
+  { icon: Users, label: 'Team', href: '/team', roles: ['admin', 'manager'] },
+
   { icon: UserCog, label: 'Employees', href: '/admin/employees', roles: ['admin'] },
   { icon: Settings, label: 'Settings', href: '/settings', roles: ['admin'] },
 ];

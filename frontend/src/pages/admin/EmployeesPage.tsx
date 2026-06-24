@@ -130,14 +130,14 @@ export default function EmployeesPage() {
             name: `${u.firstName} ${u.lastName}`,
             username: u.userName, // Database-dən birbaşa userName götürürük
             email: u.email,
-            role: u.roleId === 2 ? 'admin' : u.roleId === 3 ? 'manager' : 'employee',
+            role: u.roleId === 2 ? 'admin' : u.roleId === 3 ? 'manager' : u.roleId === 4 ? 'employee' : 'superadmin',
             isSuperAdmin: u.roleId === 1,
             department: 'Production',
             status: u.isActive ? 'active' : 'inactive',
             avatar: u.avatarUrl || `https://ui-avatars.com/api/?name=${u.firstName}+${u.lastName}`,
             createdAt: new Date(u.createdAt || Date.now())
           }));
-          setUsers(mappedUsers);
+          setUsers(mappedUsers.filter((u: any) => !u.isSuperAdmin));
         }
       } catch (error) {
         console.error("Failed to fetch employees from DB:", error);
@@ -216,19 +216,6 @@ export default function EmployeesPage() {
               </div>
             </CardContent>
           </Card>
-          {user?.isSuperAdmin && (
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Super Admins</p>
-                    <p className="text-2xl font-bold">{counts.superAdmins}</p>
-                  </div>
-                  <Users className="h-8 w-8 text-purple-600" />
-                </div>
-              </CardContent>
-            </Card>
-          )}
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
