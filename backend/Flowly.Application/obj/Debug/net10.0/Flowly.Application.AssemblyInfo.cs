@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flowly.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad08131009d7a4589df8ef82eecd35d2c38d0c50")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aab3240e8591400b7d2feb0865097c5962e0fb91")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flowly.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flowly.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
