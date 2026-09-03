@@ -1,41 +1,54 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj": {}
+    "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj": {
+    "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj",
+        "projectUniqueName": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj",
         "projectName": "Flowly.Api",
-        "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj",
-        "packagesPath": "C:\\Users\\umid.shirinov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Api\\obj\\",
+        "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Api\\Flowly.Api.csproj",
+        "packagesPath": "C:\\Users\\sirin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\umid.shirinov\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sirin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
-                "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj"
+              "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
+                "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj"
               },
-              "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj"
+              "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj"
               }
             }
           }
         },
         "warningProperties": {
+          "noWarn": [
+            "NU1605"
+          ],
           "warnAsError": [
             "NU1605"
           ]
@@ -45,10 +58,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "AutoMapper": {
@@ -84,6 +98,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[10.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.2.3, )"
             }
           },
           "imports": [
@@ -105,7 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -523,30 +541,40 @@
         }
       }
     },
-    "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
+    "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj",
+        "projectUniqueName": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj",
         "projectName": "Flowly.Application",
-        "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj",
-        "packagesPath": "C:\\Users\\umid.shirinov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\obj\\",
+        "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj",
+        "packagesPath": "C:\\Users\\sirin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\umid.shirinov\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sirin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj": {
-                "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj"
+              "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj": {
+                "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj"
               }
             }
           }
@@ -561,10 +589,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "AutoMapper": {
@@ -600,7 +629,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -878,26 +907,36 @@
         }
       }
     },
-    "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj": {
+    "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj",
         "projectName": "Flowly.Domain",
-        "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj",
-        "packagesPath": "C:\\Users\\umid.shirinov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Domain\\obj\\",
+        "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\Flowly.Domain.csproj",
+        "packagesPath": "C:\\Users\\sirin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\umid.shirinov\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sirin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -912,10 +951,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -933,7 +973,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1211,30 +1251,40 @@
         }
       }
     },
-    "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj": {
+    "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj",
         "projectName": "Flowly.Infrastructure",
-        "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\umid.shirinov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\Flowly.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\sirin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\umid.shirinov\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sirin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
-                "projectPath": "C:\\Users\\umid.shirinov\\Desktop\\Task\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj"
+              "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj": {
+                "projectPath": "C:\\Users\\sirin\\OneDrive - std.beu.edu.az\\Desktop\\My Project\\flowly-tasks\\backend\\Flowly.Application\\Flowly.Application.csproj"
               }
             }
           }
@@ -1249,10 +1299,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Autofac": {
@@ -1286,6 +1337,10 @@
             "Npgsql": {
               "target": "Package",
               "version": "[9.0.3, )"
+            },
+            "SQLitePCLRaw.lib.e_sqlite3": {
+              "target": "Package",
+              "version": "[3.53.3, )"
             }
           },
           "imports": [
@@ -1304,7 +1359,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

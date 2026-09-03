@@ -45,6 +45,7 @@ builder.Services.AddAuthorization();
 // Controller-ləri əlavə edirik
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
 
 // MediatR qeydiyyatı
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Flowly.Application.Interfaces.IUserRepository).Assembly));
@@ -63,12 +64,25 @@ builder.Services.AddScoped<Flowly.Application.Interfaces.IRefreshTokenRepository
 builder.Services.AddScoped<Flowly.Application.Interfaces.ITokenService, Flowly.Infrastructure.Services.TokenService>();
 builder.Services.AddScoped<Flowly.Application.Interfaces.IPasswordResetTokenRepository, Flowly.Infrastructure.Repositories.PasswordResetTokenRepository>();
 builder.Services.AddScoped<Flowly.Application.Interfaces.ITeamsRepository, Flowly.Infrastructure.Repositories.TeamsRepository>();
+builder.Services.AddScoped<Flowly.Application.Interfaces.IDepartmentRepository, Flowly.Infrastructure.Repositories.DepartmentRepository>();
 
 // Logging əlavə edirik (DbSeeder üçün lazımdır)
 builder.Services.AddLogging();
 
 // Dapper-in snake_case sütunları PascalCase modellərə tanıması üçün
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", builder =>
+       {
+           builder.WithOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:8080")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); // Cookie göndərmək/almaq üçün mütləqdir
+       }
+    );
+});
 
 var app = builder.Build();
 
@@ -81,7 +95,11 @@ await DbSeeder.SeedSuperAdminAsync(app.Services);
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

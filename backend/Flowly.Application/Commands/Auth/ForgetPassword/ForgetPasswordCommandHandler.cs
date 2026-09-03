@@ -11,13 +11,11 @@ namespace Flowly.Application.Commands.Auth.ForgetPassword;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordResetTokenRepository _tokenRepository;
         private readonly IPasswordHasher _passwordHasher;
-        private readonly IMapper _mapper;
 
         public ForgetPasswordCommandHandler(
             IUserRepository userRepository,
             IPasswordResetTokenRepository tokenRepository,
-            IPasswordHasher passwordHasher,
-            IMapper mapper)
+            IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
             _tokenRepository = tokenRepository;

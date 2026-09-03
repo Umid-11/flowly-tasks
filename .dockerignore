@@ -1,0 +1,12 @@
+# Build artifacts - bunlar Docker restore-dan sonra yenidən yaranır
+# Host maşındakı DevExpress path-li project.assets.json-u içəri buraxmamalıyıq
+**/obj/
+**/bin/
+
+# IDE faylları
+.vs/
+*.user
+
+# Git
+.git/
+.gitignore

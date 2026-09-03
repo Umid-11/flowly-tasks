@@ -62,6 +62,10 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
+
+        _logger.LogInformation("Login request: {username}, {password}", dto.Username, dto.Password);
+
+        _logger.LogInformation("Login request: {username}", dto.Username);
              try
                 {
                     var command = new LoginCommand

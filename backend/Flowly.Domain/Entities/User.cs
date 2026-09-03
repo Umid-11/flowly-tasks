@@ -11,7 +11,7 @@ public class User
     public string? AvatarUrl { get; set; }
     public bool IsActive { get; set; } = true;
     public int RoleId { get; set; }
-    public Role Role { get; set; } 
+    public Role Role { get; set; } = null!;
     public int FailedLoginAttempts { get; set; } = 0;
     public int? DepartmentId { get; set; }
     public string? Position { get; set; }

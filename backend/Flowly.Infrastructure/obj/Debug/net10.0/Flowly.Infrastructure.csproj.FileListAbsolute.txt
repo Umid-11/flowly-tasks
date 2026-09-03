@@ -16,3 +16,21 @@ C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Infrastructure\o
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\refint\Flowly.Infrastructure.dll
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.pdb
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\ref\Flowly.Infrastructure.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Infrastructure.deps.json
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Infrastructure.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Infrastructure.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Application.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Domain.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Application.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\bin\Debug\net10.0\Flowly.Domain.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.AssemblyInfo.cs
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.sourcelink.json
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.I.60B42F96.Up2Date
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\refint\Flowly.Infrastructure.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\Flowly.Infrastructure.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Infrastructure\obj\Debug\net10.0\ref\Flowly.Infrastructure.dll

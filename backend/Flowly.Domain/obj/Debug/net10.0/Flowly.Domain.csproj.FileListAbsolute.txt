@@ -10,3 +10,15 @@ C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Domain\obj\Debug
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\refint\Flowly.Domain.dll
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.pdb
 C:\Users\umid.shirinov\Desktop\Task\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\ref\Flowly.Domain.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\bin\Debug\net10.0\Flowly.Domain.deps.json
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\bin\Debug\net10.0\Flowly.Domain.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\bin\Debug\net10.0\Flowly.Domain.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.AssemblyInfoInputs.cache
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.AssemblyInfo.cs
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.csproj.CoreCompileInputs.cache
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.sourcelink.json
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\refint\Flowly.Domain.dll
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\Flowly.Domain.pdb
+C:\Users\sirin\OneDrive - std.beu.edu.az\Desktop\My Project\flowly-tasks\backend\Flowly.Domain\obj\Debug\net10.0\ref\Flowly.Domain.dll
