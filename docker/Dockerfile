@@ -21,6 +21,8 @@ COPY backend/Flowly.Infrastructure/Flowly.Infrastructure.csproj Flowly.Infrastru
 # NuGet paketlərini yükləyirik (restore)
 RUN dotnet restore Flowly.Api/Flowly.Api.csproj
 
+
+
 # İndi bütün source kodu kopyalayırıq
 COPY backend/ .
 
@@ -36,6 +38,8 @@ RUN dotnet publish Flowly.Api/Flowly.Api.csproj \
 # SDK yox, yalnız ASP.NET runtime lazımdır
 # ============================================================
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+
+RUN apt-get update && apt-get install -y libgssapi-krb5-2 && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
