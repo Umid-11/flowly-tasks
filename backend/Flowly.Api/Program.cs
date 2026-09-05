@@ -76,7 +76,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", builder =>
        {
-           builder.WithOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:8080")
+           builder.WithOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:8080","http://136.114.89.34:3000",
+            "http://136.114.89.34")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
                   .AllowCredentials(); // Cookie göndərmək/almaq üçün mütləqdir
