@@ -34,6 +34,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { API_BASE_URL } from '@/config/api';
+
 
 interface DBTeam {
   id: number;
@@ -85,7 +87,7 @@ export default function TeamPage() {
     setIsTeamsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5064/api/team', {
+      const response = await fetch(`${API_BASE_URL}/api/team`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -110,7 +112,7 @@ export default function TeamPage() {
     setIsMembersLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5064/api/team/${teamId}/members`, {
+      const response = await fetch(`${API_BASE_URL}/api/team/${teamId}/members`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -133,7 +135,7 @@ export default function TeamPage() {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await fetch('http://localhost:5064/api/users');
+      const response = await fetch(`${API_BASE_URL}/api/users`);
       if (response.ok) {
         const data = await response.json();
         setAllUsers(data.map(mapDBUser).filter((u: User) => !u.isSuperAdmin));
@@ -163,7 +165,7 @@ export default function TeamPage() {
     setIsCreating(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5064/api/team/create-team', {
+      const response = await fetch(`${API_BASE_URL}/api/team/create-team`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -207,7 +209,7 @@ export default function TeamPage() {
     setIsActionLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5064/api/team/add-member', {
+      const response = await fetch(`${API_BASE_URL}/api/team/add-member`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -247,7 +249,7 @@ export default function TeamPage() {
     setIsActionLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5064/api/team/remove-member', {
+      const response = await fetch(`${API_BASE_URL}/api/team/remove-member`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

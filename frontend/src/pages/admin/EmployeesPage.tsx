@@ -23,6 +23,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { User } from '@/types';
+import { API_BASE_URL } from '@/config/api';
+
 
 export default function EmployeesPage() {
   const { user, updateUserRole } = useAuth();
@@ -40,7 +42,7 @@ export default function EmployeesPage() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:5064/api/users/reset-password`,
+        `${API_BASE_URL}/api/users/reset-password`,
         {
           method: 'POST',
           headers: {
@@ -71,7 +73,7 @@ export default function EmployeesPage() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5064/api/users/update-active-status`,
+        `${API_BASE_URL}/api/users/update-active-status`,
         {
           method: "PUT",
           headers: {
@@ -122,7 +124,7 @@ export default function EmployeesPage() {
   useEffect(() => {
     const fetchEmployeesFromDB = async () => {
       try {
-        const response = await fetch('http://localhost:5064/api/users');
+        const response = await fetch(`${API_BASE_URL}/api/users`);
         if (response.ok) {
           const dbUsers = await response.json();
           const mappedUsers = dbUsers.map((u: any) => ({

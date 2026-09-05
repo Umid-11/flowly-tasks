@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, UserRole, AuthState } from '@/types';
+import { API_BASE_URL } from '@/config/api';
+
 
 interface AuthContextType extends AuthState {
   login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
@@ -55,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (username: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      const response = await fetch('http://localhost:5064/api/Auth/login', {
+      const response = await fetch(`${API_BASE_URL}/api/Auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -91,7 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = async (): Promise<void> => {
     try {
       // Backend-ə logout sorğusu göndəririk ki, HttpOnly cookie silinsi
-      await fetch('http://localhost:5064/api/Auth/logout', {
+      await fetch(`${API_BASE_URL}/api/Auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -117,7 +119,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     role: UserRole
   ): Promise<boolean> => {
     try {
-      const response = await fetch('http://localhost:5064/api/Auth/register', {
+      const response = await fetch(`${API_BASE_URL}/api/Auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, firstName, lastName, email, password }),
@@ -156,7 +158,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const roleId = roleIdMap[newRole];
       if (!roleId) return false;
 
-      const response = await fetch('http://localhost:5064/api/Users/update-role', {
+      const response = await fetch(`${API_BASE_URL}/api/Users/update-role`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
